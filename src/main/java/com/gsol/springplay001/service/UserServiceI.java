@@ -10,5 +10,6 @@ import java.util.List;
 
 public interface UserServiceI {
 
-    public User findUserAllergentList(int userId);
+    User findUserAllergentList(int userId);
+    List<User> findAllUser();
 }

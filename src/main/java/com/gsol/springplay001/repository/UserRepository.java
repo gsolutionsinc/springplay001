@@ -6,13 +6,14 @@ package com.gsol.springplay001.repository;
 
 import com.gsol.springplay001.model.FoodAllergent;
 import com.gsol.springplay001.model.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@Slf4j
 public class UserRepository {
 
     private static List<FoodAllergent> user1Allergents = new ArrayList<FoodAllergent>();
@@ -23,7 +24,7 @@ public class UserRepository {
     private static User user2 = new User(1, "Feb", "2019", user2Allergents);
     private static User user3 = new User(1, "Mar", "2019", user3Allergents);
 
-
+    // TODO database connectivity
     static {
 
         FoodAllergent egg = new FoodAllergent(new Integer(1), new String("egg"));
@@ -31,17 +32,17 @@ public class UserRepository {
         FoodAllergent almond = new FoodAllergent(new Integer(3), new String("almond"));
         FoodAllergent cashew = new FoodAllergent(new Integer(4), new String("cashew"));
 
-        user1Allergents.add(new FoodAllergent(new Integer(1), new String("egg")));
-        user1Allergents.add(new FoodAllergent(new Integer(2), new String("peanut")));
+        user1Allergents.add(egg);
+        user1Allergents.add(peanut);
 
-        user2Allergents.add(new FoodAllergent(new Integer(3), new String("almond")));
-        user2Allergents.add(new FoodAllergent(new Integer(4), new String("cashew")));
+        user2Allergents.add(almond);
+        user2Allergents.add(cashew);
 
-        user3Allergents.add(new FoodAllergent(new Integer(1), new String("egg")));
+        user3Allergents.add(egg);
 
-        user1.setFoodAllergentsList(getFoodAllergentForUser(1));
-        user2.setFoodAllergentsList(getFoodAllergentForUser(2));
-        user3.setFoodAllergentsList(getFoodAllergentForUser(3));
+        user1.setFoodAllergentsList(user1Allergents);
+        user2.setFoodAllergentsList(user2Allergents);
+        user3.setFoodAllergentsList(user3Allergents);
     }
 
     public static User getUserAllegentList(int userId) {
@@ -58,25 +59,13 @@ public class UserRepository {
         return null;
     }
 
-    private static List<FoodAllergent> getFoodAllergentForUser(int userId) {
-
-        if (userId == 1) {
-            return user1Allergents;
-        }
-        if (userId == 2) {
-            return user2Allergents;
-        }
-        if (userId == 3) {
-            return user3Allergents;
-        }
-
-        return null;
-    }
-
     public List<User> findAllUsers() {
 
-        // TODO database connectivity
+        List<User> listOfAllUsers = new ArrayList<>();
+        listOfAllUsers.add(user1);
+        listOfAllUsers.add(user2);
+        listOfAllUsers.add(user3);
 
-        return null;
+        return listOfAllUsers;
     }
 }

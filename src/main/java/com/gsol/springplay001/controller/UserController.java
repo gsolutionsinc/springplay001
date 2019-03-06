@@ -7,6 +7,7 @@ package com.gsol.springplay001.controller;
 import com.gsol.springplay001.model.FoodAllergent;
 import com.gsol.springplay001.model.User;
 import com.gsol.springplay001.service.UserServiceI;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Date;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping(path = "/user")
 public class UserController {
@@ -27,15 +29,18 @@ public class UserController {
         return new Date().toString();
     }
 
-    @GetMapping(path="/userDetails", produces = "application/json")
+    @GetMapping(path="/userdetails", produces = "application/json")
     public User userDetails(int userId) {
-
         return userService.findUserAllergentList(userId);
     }
 
-    @GetMapping(path="/userFoodAllergies", produces = "application/json")
-    public List<FoodAllergent> userFoodAllergies(int userId) {
+    @GetMapping(path = "/allusers", produces = "application/json")
+    public List<User> allUsers() {
+        return userService.findAllUser();
+    }
 
+    @GetMapping(path="/userfoodallergies", produces = "application/json")
+    public List<FoodAllergent> userFoodAllergies(int userId) {
         return userService.findUserAllergentList(userId).getFoodAllergentsList();
     }
 
