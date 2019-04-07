@@ -4,11 +4,12 @@
 
 package com.gsol.springplay001.service;
 
-import com.gsol.springplay001.model.User;
+import com.gsol.springplay001.model.Entity.User;
 
 import java.util.List;
 
 public interface UserServiceI {
 
-    public User findUserAllergentList(int userId);
+    User findUserAllergenList(int userId);
+    List<User> findAllUser();
 }

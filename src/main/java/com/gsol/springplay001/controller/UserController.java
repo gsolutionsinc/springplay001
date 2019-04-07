@@ -4,17 +4,20 @@
 
 package com.gsol.springplay001.controller;
 
-import com.gsol.springplay001.model.FoodAllergent;
-import com.gsol.springplay001.model.User;
+import com.gsol.springplay001.model.Entity.Allergen;
+import com.gsol.springplay001.model.Entity.User;
 import com.gsol.springplay001.service.UserServiceI;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping(path = "/user")
 public class UserController {
@@ -24,19 +27,31 @@ public class UserController {
 
     @GetMapping(path="/ping", produces = "application/json")
     public String ping() {
+
+        log.info("--ping--");
         return new Date().toString();
     }
 
-    @GetMapping(path="/userDetails", produces = "application/json")
-    public User userDetails(int userId) {
+    @GetMapping(path="/userdetails/{userId}", produces = "application/json")
+    public User userDetails(@PathVariable int userId) {
 
-        return userService.findUserAllergentList(userId);
+        log.info("--userDetails--");
+        return userService.findUserAllergenList(userId);
     }
 
-    @GetMapping(path="/userFoodAllergies", produces = "application/json")
-    public List<FoodAllergent> userFoodAllergies(int userId) {
+    @GetMapping(path = "/allusers", produces = "application/json")
+    public List<User> allUsers() {
 
-        return userService.findUserAllergentList(userId).getFoodAllergentsList();
+        log.info("--allUsers--");
+        return userService.findAllUser();
+    }
+
+    @GetMapping(path="/userfoodallergies/{userId}", produces = "application/json")
+    public List<Allergen> userFoodAllergies(@PathVariable int userId) {
+
+        log.info("--userFoodAllergies--");
+        return null; // TODO create user service for userFoodAllergies
+        // return userService.findUserAllergenList(userId).getAllergentsList();
     }
 
 }
