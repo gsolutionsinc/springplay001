@@ -4,8 +4,8 @@
 
 package com.gsol.springplay001.service;
 
-import com.gsol.springplay001.model.User;
-import com.gsol.springplay001.repository.UserRepository;
+import com.gsol.springplay001.model.Entity.User;
+import com.gsol.springplay001.repository.UserRepositoryStatic;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,17 +17,17 @@ import java.util.List;
 public class UserService implements UserServiceI {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepositoryStatic userRepositoryStatic;
 
     @Override
-    public User findUserAllergentList(int userId) {
+    public User findUserAllergenList(int userId) {
 
-        return userRepository.getUserAllegentList(userId);
+        return userRepositoryStatic.getUserAllegenList(userId);
     }
 
     @Override
     public List<User> findAllUser() {
 
-        return userRepository.findAllUsers();
+        return userRepositoryStatic.findAllUsers();
     }
 }

@@ -4,8 +4,8 @@
 
 package com.gsol.springplay001.controller;
 
-import com.gsol.springplay001.model.FoodAllergent;
-import com.gsol.springplay001.model.User;
+import com.gsol.springplay001.model.Entity.Allergen;
+import com.gsol.springplay001.model.Entity.User;
 import com.gsol.springplay001.service.UserServiceI;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class UserController {
     public User userDetails(@PathVariable int userId) {
 
         log.info("--userDetails--");
-        return userService.findUserAllergentList(userId);
+        return userService.findUserAllergenList(userId);
     }
 
     @GetMapping(path = "/allusers", produces = "application/json")
@@ -47,10 +47,11 @@ public class UserController {
     }
 
     @GetMapping(path="/userfoodallergies/{userId}", produces = "application/json")
-    public List<FoodAllergent> userFoodAllergies(@PathVariable int userId) {
+    public List<Allergen> userFoodAllergies(@PathVariable int userId) {
 
         log.info("--userFoodAllergies--");
-        return userService.findUserAllergentList(userId).getFoodAllergentsList();
+        return null; // TODO create user service for userFoodAllergies
+        // return userService.findUserAllergenList(userId).getAllergentsList();
     }
 
 }
